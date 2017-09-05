@@ -1,5 +1,5 @@
 $nuGetPath = "C:\Chocolatey\bin\nuget.bat"
-$msBuildPath = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
+$msBuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\MSBuild.exe"
 
 cd c:\src
 & $nuGetPath restore .\ProductLaunch.sln
