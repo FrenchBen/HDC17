@@ -13,12 +13,12 @@ docker-compose -f .\app\docker-compose-v1.yml up -d
 
 Get the IP of our app:
 ```
-docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}'  app_app_1
+docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}'  app_mta-app_1
 ```
 
 Check SQL:
 ```
-docker container exec app_db_1 powershell `
+docker container exec app_mta-db_1 powershell `
  "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database SignUp"
 ```
 
