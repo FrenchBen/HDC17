@@ -14,7 +14,7 @@ services:
       - app-net
 
   web:
-    image: sixeyed/signup-web:v1
+    image: frenchben/signup-web:v1
     ports:
       - "80"
     env_file:

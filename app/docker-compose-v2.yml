@@ -14,7 +14,7 @@ services:
       - app-net
 
   web:
-    image: sixeyed/signup-web
+    image: frenchben/signup-web
     ports:
       - "80"
     env_file:
@@ -33,7 +33,7 @@ services:
       - app-net
 
   signup-save-handler:
-    image: sixeyed/signup-save-handler
+    image: frenchben/signup-save-handler
     env_file:
       - db-credentials.env
     depends_on:

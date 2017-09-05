@@ -13,8 +13,8 @@ if ((Test-Path Env:\HUB_USER) -and (Test-Path Env:\HUB_PASSWORD)) {
 
 foreach ($repository in $repositories) {
 
-    $sourceTag = "sixeyed/$($repository)"
-    $targetTag = "sixeyed/$($repository):$($tag)"
+    $sourceTag = "frenchben/$($repository)"
+    $targetTag = "frenchben/$($repository):$($tag)"
 
     docker tag $sourceTag $targetTag
 
