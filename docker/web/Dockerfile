@@ -1,6 +1,6 @@
 # escape=`
 
-FROM sixeyed/msbuild:netfx-4.5.2-webdeploy-10.0.14393.1198 AS builder
+FROM frenchben/msbuild:4.5.2 AS builder
 
 WORKDIR C:\src\SignUp.Web
 COPY src\SignUp\SignUp.Web\packages.config .

@@ -17,7 +17,7 @@ services:
       - app-net
 
   web:
-    image: sixeyed/signup-web
+    image: frenchben/signup-web
     env_file:
       - db-credentials.env
     depends_on:
@@ -27,7 +27,7 @@ services:
       - app-net
 
   save-handler:
-    image: sixeyed/signup-save-handler
+    image: frenchben/signup-save-handler
     env_file:
       - db-credentials.env
     depends_on:
@@ -37,7 +37,7 @@ services:
       - app-net
 
   index-handler:
-    image: sixeyed/signup-index-handler
+    image: frenchben/signup-index-handler
     depends_on:
       - elasticsearch
       - message-queue
@@ -45,14 +45,14 @@ services:
       - app-net
 
   elasticsearch:
-    image: sixeyed/elasticsearch:nanoserver
+    image: frenchben/elasticsearch:nanoserver
     environment:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     networks:
       - app-net
 
   kibana:
-    image: sixeyed/kibana:nanoserver
+    image: frenchben/kibana:nanoserver
     depends_on:
       - elasticsearch
     networks:
