@@ -38,14 +38,14 @@ services:
       - app-net
 
   homepage:
-    image: sixeyed/dddsw7-homepage
+    image: frenchben/hdc-homepage
     ports:
       - "8090:80"
     networks:
       - app-net
 
   mta-app:
-    image: sixeyed/dddsw7-web:v2
+    image: frenchben/hdc-web:v2
     ports:
       - "80:80"
     environment:
@@ -59,7 +59,7 @@ services:
       - app-net
 
   mta-save-handler:
-    image: sixeyed/dddsw7-save-handler
+    image: frenchben/hdc-save-handler
     env_file:
       - db-credentials.env
     depends_on:
@@ -69,7 +69,7 @@ services:
       - app-net
 
   mta-index-handler:
-    image: sixeyed/dddsw7-index-handler
+    image: frenchben/hdc-index-handler
     depends_on:
       - elasticsearch
       - message-queue
