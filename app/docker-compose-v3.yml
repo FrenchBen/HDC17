@@ -1,0 +1,74 @@
+version: '3.1'
+
+services:
+  
+  db:
+    image: microsoft/mssql-server-windows-express
+    ports:
+      - "1433"
+    environment: 
+      - ACCEPT_EULA=Y
+    env_file:
+      - db-credentials.env
+    networks:
+      - app-net
+
+  web:
+    image: sixeyed/signup-web
+    ports:
+      - "80"
+    env_file:
+      - db-credentials.env
+    depends_on:
+      - db
+      - message-queue
+    networks:
+      - app-net
+
+  message-queue:
+    ports:
+      - "4222"
+    image: nats:nanoserver
+    networks:
+      - app-net
+
+  signup-save-handler:
+    image: sixeyed/signup-save-handler
+    env_file:
+      - db-credentials.env
+    depends_on:
+      - db
+      - message-queue
+    networks:
+      - app-net
+
+  elasticsearch:
+    ports:
+      - "9200"
+    image: sixeyed/elasticsearch:nanoserver
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    networks:
+      - app-net
+
+  kibana:
+    image: sixeyed/kibana:nanoserver
+    ports:
+      - "5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - app-net
+
+  signup-index-handler:
+    image: sixeyed/signup-index-handler
+    depends_on:
+      - elasticsearch
+      - message-queue
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    external:
+      name: nat

@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+
+  db:
+    ports:
+      - "1433"
+
+  message-queue:
+    ports:
+      - "4222"
+
+  elasticsearch:
+    ports:
+      - "9200"
+
+  kibana:
+    ports:
+      - "5601"
+
+  web:
+    ports:
+      - "80"
+
+networks:
+  app-net:
+    external:
+      name: nat
