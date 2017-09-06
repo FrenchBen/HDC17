@@ -5,17 +5,13 @@
 Build v1:
 
 ```
-cd C:\src\github\frenchben\newsletter-signup\docker\web-v1
-
-docker image build --tag frenchben/signup-web:v1 .
+docker image build --tag frenchben/signup-web:v1 .\docker\web-v1
 ```
 
 Start v1:
 
 ```
-cd C:\src\github\frenchben\newsletter-signup\app
-
-docker-compose -f docker-compose-v1.yml up -d
+docker-compose -f app\docker-compose-v1.yml up -d
 ```
 
 Run app & check SQL:
