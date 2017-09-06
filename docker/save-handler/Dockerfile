@@ -10,7 +10,8 @@ COPY src\SignUp C:\src
 RUN msbuild SignUp.MessageHandlers.SaveProspect.csproj /p:OutputPath=c:\out\save-prospect\SaveProspectHandler
 
 # app image
-FROM microsoft/windowsservercore:10.0.14393.1198
+## Windows Server 2016 Server Core base OS image for Windows containers
+FROM microsoft/windowsservercore:10.0.14393.1593
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
 RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord
