@@ -103,6 +103,16 @@ docker container exec app_db_1 powershell `
  "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database SignUp"
 ```
 
+Check Events:
+```
+docker container logs app_message-queue_1
+```
+
+Check Events container gnatsd.exe (Go app)
+```
+docker container top app_message-queue_1
+```
+
 ## Demo 3
 
 Build v3:
@@ -113,10 +123,10 @@ docker image build --tag frenchben/signup-index-handler -f docker\index-handler\
 ```
 OSX:
 ```
-docker image build --tag frenchben/signup-index-handler -f docker/index-handler\Dockerfile .
+docker image build --tag frenchben/signup-index-handler -f docker/index-handler/Dockerfile .
 ```
 
-Start v2:
+Start v3:
 
 WIN:
 ```
