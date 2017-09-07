@@ -39,8 +39,14 @@ docker inspect --format '{{ .NetworkSettings.Networks.nat.IPAddress }}'  app_web
 
 Check SQL:
 
+WIN:
 ```
 docker container exec app_db_1 powershell `
+ "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database SignUp"
+```
+OSX:
+```
+docker container exec app_db_1 powershell \
  "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database SignUp"
 ```
 
