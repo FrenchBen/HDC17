@@ -14,6 +14,7 @@ RUN msbuild SignUp.MessageHandlers.SaveProspect.csproj /p:OutputPath=c:\out\save
 FROM microsoft/windowsservercore:10.0.14393.1593
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
+# Causes the in-container Windows DNS Client to not start, prevents skipping the built-in Docker DNS server
 RUN Set-ItemProperty -path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord
 
 WORKDIR /save-prospect-handler

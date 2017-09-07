@@ -26,7 +26,7 @@ services:
       - app-net
 
   message-queue:
-    image: nats:nanoserver
+    image: nats:nanoserver # NATS is an open-source, high-performance, cloud native messaging system.
     ports:
       - "4222"
     networks:

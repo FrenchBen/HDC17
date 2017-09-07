@@ -20,6 +20,7 @@ RUN Remove-Website -Name 'Default Web Site';`
     New-Item -Path 'C:\web-app' -Type Directory; `
     New-Website -Name 'web-app' -Port 80 -PhysicalPath 'C:\web-app'
 
+# Check localhost to make sure app is healthy - Acts as smoke-test + warmup, as it keeps cache up to date
 HEALTHCHECK --interval=5s `
  CMD powershell -command `
     try { `

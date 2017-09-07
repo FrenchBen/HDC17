@@ -15,6 +15,18 @@ docker image build --tag frenchben/signup-web:v1 docker/web-v1
 
 Start v1:
 
+SQL Server Express
+```
+docker container run --detach --name db -it -P --env ACCEPT_EULA=Y --env-file app/db-credentials.env --network nat microsoft/mssql-server-windows-express
+```
+
+Signup web
+```
+docker container run --detach --name web -P --env-file app/db-credentials.env --network nat frenchben/signup-web:v1
+```
+
+
+#### Compose
 WIN:
 ```
 docker-compose -f app\docker-compose-v1.yml up -d
