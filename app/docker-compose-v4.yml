@@ -1,0 +1,85 @@
+version: '3.1'
+
+services:
+  
+  db:
+    image: microsoft/mssql-server-windows-express
+    ports:
+      - "1433:1433"
+    environment: 
+      - ACCEPT_EULA=Y
+    env_file:
+      - db-credentials.env
+    networks:
+      - app-net
+
+  frontend:
+    image: frenchben/frontend
+    ports:
+      - "81:80"
+    networks:
+      - app-net
+
+  web:
+    image: frenchben/signup-web
+    ports:
+      - "80:80"
+    environment: 
+      - HOMEPAGE_URL=http://frontend
+    env_file:
+      - db-credentials.env
+    depends_on:
+      - db
+      - message-queue
+    networks:
+      - app-net
+
+  message-queue:
+    ports:
+      - "4222:4222"
+    image: nats:nanoserver
+    networks:
+      - app-net
+
+  signup-save-handler:
+    image: frenchben/signup-save-handler
+    env_file:
+      - db-credentials.env
+    depends_on:
+      - db
+      - message-queue
+    networks:
+      - app-net
+
+  # JAVA Application
+  elasticsearch:
+    ports:
+      - "9200:9200"
+    image: frenchben/elasticsearch:nanoserver
+    environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    networks:
+      - app-net
+
+  # NODEJS Application
+  kibana:
+    image: frenchben/kibana:nanoserver
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - app-net
+
+  signup-index-handler:
+    image: frenchben/signup-index-handler
+    depends_on:
+      - elasticsearch
+      - message-queue
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    external:
+      name: nat
