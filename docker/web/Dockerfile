@@ -1,5 +1,6 @@
 # escape=`
 
+## Build the project as I normally would with Visual Studio
 FROM frenchben/msbuild:4.5.2 AS builder
 
 WORKDIR C:\src\SignUp.Web
@@ -11,6 +12,7 @@ RUN msbuild SignUp.Web.csproj /p:OutputPath=c:\out\web\SignUpWeb `
         /p:DeployOnBuild=true /p:VSToolsPath=C:\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\tools\VSToolsPath
 
 # app image
+## Package the built project into a container as I did with V1
 FROM microsoft/aspnet:windowsservercore-10.0.14393.1593
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
