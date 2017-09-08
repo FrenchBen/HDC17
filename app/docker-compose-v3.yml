@@ -42,6 +42,7 @@ services:
     networks:
       - app-net
 
+  # JAVA Application
   elasticsearch:
     ports:
       - "9200:9200"
@@ -51,6 +52,7 @@ services:
     networks:
       - app-net
 
+  # NODEJS Application
   kibana:
     image: frenchben/kibana:nanoserver
     ports:
