@@ -5,7 +5,7 @@ services:
   db:
     image: microsoft/mssql-server-windows-express
     ports:
-      - "1433"
+      - "1433:1433"
     environment: 
       - ACCEPT_EULA=Y
     env_file:
@@ -16,7 +16,7 @@ services:
   web:
     image: frenchben/signup-web
     ports:
-      - "80"
+      - "80:80"
     env_file:
       - db-credentials.env
     depends_on:
@@ -28,7 +28,7 @@ services:
   message-queue:
     image: nats:nanoserver # NATS is an open-source, high-performance, cloud native messaging system.
     ports:
-      - "4222"
+      - "4222:4222"
     networks:
       - app-net
 

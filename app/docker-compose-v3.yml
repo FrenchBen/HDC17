@@ -5,7 +5,7 @@ services:
   db:
     image: microsoft/mssql-server-windows-express
     ports:
-      - "1433"
+      - "1433:1433"
     environment: 
       - ACCEPT_EULA=Y
     env_file:
@@ -16,7 +16,7 @@ services:
   web:
     image: frenchben/signup-web
     ports:
-      - "80"
+      - "80:80"
     env_file:
       - db-credentials.env
     depends_on:
@@ -27,7 +27,7 @@ services:
 
   message-queue:
     ports:
-      - "4222"
+      - "4222:4222"
     image: nats:nanoserver
     networks:
       - app-net
@@ -44,7 +44,7 @@ services:
 
   elasticsearch:
     ports:
-      - "9200"
+      - "9200:9200"
     image: frenchben/elasticsearch:nanoserver
     environment:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
@@ -54,7 +54,7 @@ services:
   kibana:
     image: frenchben/kibana:nanoserver
     ports:
-      - "5601"
+      - "5601:5601"
     depends_on:
       - elasticsearch
     networks:
