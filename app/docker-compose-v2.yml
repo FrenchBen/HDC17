@@ -12,7 +12,7 @@ services:
       - db-credentials.env
     networks:
       - app-net
-
+  # WebForms app
   web:
     image: frenchben/signup-web
     ports:

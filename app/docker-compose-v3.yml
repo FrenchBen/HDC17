@@ -26,9 +26,9 @@ services:
       - app-net
 
   message-queue:
+    image: nats:nanoserver
     ports:
       - "4222:4222"
-    image: nats:nanoserver
     networks:
       - app-net
 

@@ -136,3 +136,13 @@ OSX:
 ```
 docker-compose -f app/docker-compose-v3.yml up -d
 ```
+
+#### Populate Data
+```
+docker container run --rm --network nat --env-file app/db-credentials.env frenchben/e2e-tests
+```
+
+Open Kibana - Port 5601:
+```
+docker container inspect app_kibana_1
+```
